@@ -1,6 +1,6 @@
 ## Conway's Game Of Life
 
-Implementation of this paper inspired by Tsoding
+Implementation of this paper inspired by `Tsoding` - [Tsoding](https://www.youtube.com/@TsodingDaily)
 
 links -
 [Generalization of Conway’s ”Game of Life” to a
