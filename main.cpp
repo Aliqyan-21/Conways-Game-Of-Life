@@ -1,3 +1,4 @@
+#include <cmath>
 #include <ctime>
 #include <iostream>
 
@@ -8,9 +9,14 @@
 char level[] = " .-=coaA@#";
 #define level_count (sizeof(level) / sizeof(char)) - 1
 
+// initialization of parameters mentioned in the paper
 float grid[Height][Width] = {0.f};
 float ra = 21;
 float ri = ra / 3;
+float alpha = 0.028;
+// float alpha = 0.0147;
+float b1 = 0.278, b2 = 0.365;
+float d1 = 0.267, d2 = 0.445;
 
 inline float rand_float() { return (float)rand() / (float)RAND_MAX; }
 
@@ -33,6 +39,24 @@ void display_grid() {
 }
 
 inline int emod(int a, int b) { return (a % b + b) % b; }
+
+// declaration of the functions mentioned in the paper
+float sigma1(float x, float a) {
+  return 1.f / (1.f + expf(-(x - a) * 4 / alpha));
+}
+
+float sigma2(float x, float a, float b) {
+  return sigma1(x, a) * (1 - sigma1(x, b));
+}
+
+float sigma_m(float x, float y, float m) {
+  return x * (1 - sigma1(m, 0.5f)) + y * sigma1(m, 0.5f);
+}
+
+// transition function mentioned in the paper
+float s(float n, float m) {
+  return sigma2(n, sigma_m(b1, d1, m), sigma_m(b2, d2, m));
+}
 
 int main() {
   srand(time(0));
@@ -60,7 +84,7 @@ int main() {
   m /= M;
   n /= N;
 
-  std::cout << "m = " << m << " n = " << n << std::endl;
+  std::cout << "s(n, m) = " << s(n, m) << std::endl;
 
   // display_grid();
 
