@@ -2,6 +2,6 @@
 
 Implementation of this paper inspired by `Tsoding` - [Tsoding](https://www.youtube.com/@TsodingDaily)
 
-links -
+link to paper -
 [Generalization of Conway’s ”Game of Life” to a
 continuous domain - SmoothLife](https://arxiv.org/pdf/1111.1567.pdf)
